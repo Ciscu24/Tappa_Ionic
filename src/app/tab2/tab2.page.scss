@@ -1,0 +1,16 @@
+.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text{
+    ion-row{
+        justify-content: center;
+    }
+    p{
+        text-align: center;
+        font-size: 18px;
+        margin: 10px 0px 10px 0px;
+    }
+}

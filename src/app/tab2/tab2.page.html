@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Pedidos
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 2</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let order of listado">
+    <ion-card-header (click)="this.seeOrder(order)">
+      <ion-row>
+        <ion-col col-auto size="4" class="image">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-col>
+        <ion-col class="text">
+          <ion-row text-wrap>
+            <p>C/ {{order.street}}</p>
+          </ion-row>
+          <ion-row text-wrap>
+            <p>{{order.date}}</p>
+          </ion-row>
+          <ion-row text-wrap>
+            <p>{{order.price}} €</p>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="this.backButton()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="tasks">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Apellidos</ion-label>
+      <ion-input formControlName="surnames"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label  position="floating">Contraseña</ion-label>
+      <ion-input  #passwordEyeRegister  [type]="passwordTypeInput" formControlName="password" clearOnEdit="false"></ion-input>
+      <button class="btn_eye_icon" (click)="togglePasswordMode()">
+          <ion-icon  [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
+      </button>
+    </ion-item>
+  
+    <div class="buttonFinal">
+      <ion-button color="primary" type="submit" [disabled]="!tasks.valid" (click)="register()">Registrarse</ion-button>
+    </div>
+  </form>
+
+</ion-content>

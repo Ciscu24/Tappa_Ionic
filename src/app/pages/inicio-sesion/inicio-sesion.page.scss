@@ -1,0 +1,32 @@
+.btn_eye_icon{
+    position: absolute;
+    right: 0;
+    bottom: 12px;
+    background: transparent;
+    ion-icon{
+        font-size: 22px;
+        color:#757575;
+    }
+}
+
+.btn_eye_icon:focus{
+    outline: none  !important;
+}
+
+.buttonFinal{
+    margin-top: 30px;
+    text-align: center;
+    width: 100%;
+    ion-button{
+        width: 50%;
+    }
+}
+
+ion-text{
+    text-align: right;
+    font-size: 15px;
+    p{
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+}
