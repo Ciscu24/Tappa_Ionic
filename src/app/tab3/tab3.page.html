@@ -24,6 +24,10 @@
     <hr>
     <ion-button (click)="logout()">Cerrar Sesión</ion-button>
 
-    
+    <div >
+      <img src="{{imgURL}}" height="200" width="200">
+      <ion-button (click)="getCamera()">From Camera</ion-button>
+      <ion-button (click)="getGallery()">From Gallery</ion-button>
+    </div>
   </div>
 </ion-content>

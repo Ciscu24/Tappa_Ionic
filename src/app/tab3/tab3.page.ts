@@ -4,6 +4,7 @@ import { User } from '../model/User';
 import { ApiUserService } from '../services/api-user.service';
 import { AuthService } from '../services/auth.service';
 import { LoadingService } from '../services/loading.service';
+import { Camera } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-tab3',
@@ -11,6 +12,8 @@ import { LoadingService } from '../services/loading.service';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page implements OnInit{
+
+  public imgURL;
 
   public user:User = {
     name: "",
@@ -25,6 +28,7 @@ export class Tab3Page implements OnInit{
     private authService: AuthService,
     private userService: ApiUserService,
     private loadService: LoadingService,
+    private camera: Camera,
     private router:Router) {}
 
   ngOnInit(){
@@ -43,6 +47,28 @@ export class Tab3Page implements OnInit{
     if(!this.authService.isLogged()){
       this.router.navigate(['/inicio-sesion'])
     }
+  }
+
+  getCamara(){
+    this.camera.getPicture({
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      destinationType: this.camera.DestinationType.FILE_URI
+    }).then((res)=>{
+      this.imgURL = res;
+    }).catch(e => {
+      console.log(e);
+    })
+  }
+
+  getGallery(){
+    this.camera.getPicture({
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL
+    }).then((res)=>{
+      this.imgURL = 'data:image/jpeg;base64,' + res;
+    }).catch(e => {
+      console.log(e);
+    })
   }
 
 }

@@ -22,6 +22,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { RoomTappaService } from './services/room-tappa.service';
 
+import { Camera } from '@ionic-native/camera/ngx';
+
 @NgModule({
   declarations: [AppComponent, PedidoPage],
   entryComponents: [PedidoPage],
@@ -42,6 +44,7 @@ import { RoomTappaService } from './services/room-tappa.service';
     HTTP,
     StatusBar,
     SplashScreen,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
