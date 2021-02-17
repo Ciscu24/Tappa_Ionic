@@ -97,18 +97,12 @@ export class ApiUserService {
       shipping: shipping,
       call: call
     }
-    console.log("estoy aqui");
-    console.log(myObject);
-    console.log(id);
     return new Promise((resolve, reject) => {
       if(id){
         this.http.setDataSerializer('json');
         this.http
           .put(endpoint, myObject, this.header)
           .then(d => {
-            console.log("estoy aqui");
-            console.log(myObject);
-            console.log(id);
             resolve();
           })
           .catch(err => reject(err));

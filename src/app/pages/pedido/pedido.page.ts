@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Identifiers } from '@angular/compiler';
 import { ApiUserService } from 'src/app/services/api-user.service';
 import { User } from 'src/app/model/User';
+import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
   selector: 'app-pedido',
@@ -46,6 +47,7 @@ export class PedidoPage implements OnInit {
     private loadService: LoadingService, 
     private userService: ApiUserService,
     private alertController: AlertController,
+    private toastService: ToastService,
     private orderService:ApiOrderService) {
   }
 
@@ -83,14 +85,10 @@ export class PedidoPage implements OnInit {
           
         }
       })
-      console.log(this.order.finishOrder);
-      console.log(this.order)
-      if(this.order.finishOrder === true && this.order.boss.id!=this.authService.user.id){
+      if(this.order.finishOrder === true){
         this.loadService.cargarLoading();
-        console.log(this.order);
         setTimeout(() => {
-          console.log("hola");
-          console.log(this.order.finishOrder);
+          this.order = null;
           this.loadService.pararLoading();
           this.modalController.dismiss();
          }, 1000);
@@ -205,6 +203,8 @@ export class PedidoPage implements OnInit {
       this.loadService.pararLoading();
       this.modalController.dismiss();
      }, 1000);
+
+     this.toastService.presentToast("Pedido realizado con exito", "myToast", 2000, "primary");
     
   }
 
