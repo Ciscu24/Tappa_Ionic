@@ -49,7 +49,7 @@ export class Tab3Page implements OnInit{
     }
   }
 
-  getCamara(){
+  getCamera(){
     this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI

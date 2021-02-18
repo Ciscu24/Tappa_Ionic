@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  //endpoint: 'http://localhost:8100/',
-  endpoint: 'https://tapparestful.herokuapp.com/',
+  endpoint: 'http://localhost:8100/',
+  //endpoint: 'https://tapparestful.herokuapp.com/',
   apiUser: 'user/',
   apiOrder: 'order/',
   apiFood: 'food/',

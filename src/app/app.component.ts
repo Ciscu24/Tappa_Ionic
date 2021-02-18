@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { PedidoPage } from './pages/pedido/pedido.page';
 import { NONE_TYPE } from '@angular/compiler';
 import { AuthService } from './services/auth.service';
+import { InfoPage } from './pages/info/info.page';
 
 @Component({
   selector: 'app-root',
@@ -32,9 +33,9 @@ export class AppComponent {
     });
   }
 
-  async changePedido() {
+  async changeInfo() {
     const modal = await this.modalController.create({
-      component: PedidoPage,
+      component: InfoPage,
     });
     return await modal.present();
   }
