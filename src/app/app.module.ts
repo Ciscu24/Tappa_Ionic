@@ -23,6 +23,7 @@ import { environment } from 'src/environments/environment';
 import { RoomTappaService } from './services/room-tappa.service';
 
 import { Camera } from '@ionic-native/camera/ngx';
+import { ThemeService } from './services/theme.service';
 
 @NgModule({
   declarations: [AppComponent, PedidoPage],
@@ -40,6 +41,7 @@ import { Camera } from '@ionic-native/camera/ngx';
     LoadingService,
     RoomTappaService,
     ToastService,
+    ThemeService,
     NativeStorage,
     HTTP,
     StatusBar,

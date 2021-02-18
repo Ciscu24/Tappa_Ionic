@@ -7,6 +7,7 @@ import { PedidoPage } from './pages/pedido/pedido.page';
 import { NONE_TYPE } from '@angular/compiler';
 import { AuthService } from './services/auth.service';
 import { InfoPage } from './pages/info/info.page';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
+    private themeService: ThemeService,
     private modalController: ModalController,
   ) {
     this.initializeApp();
@@ -38,5 +40,9 @@ export class AppComponent {
       component: InfoPage,
     });
     return await modal.present();
+  }
+
+  public enableDark(){
+    this.themeService.enableDark();
   }
 }

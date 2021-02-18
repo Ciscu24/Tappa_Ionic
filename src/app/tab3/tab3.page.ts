@@ -54,7 +54,7 @@ export class Tab3Page implements OnInit{
       sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.FILE_URI
     }).then((res)=>{
-      this.imgURL = res;
+      this.imgURL = 'data:image/jpeg;base64,' + res;
     }).catch(e => {
       console.log(e);
     })
