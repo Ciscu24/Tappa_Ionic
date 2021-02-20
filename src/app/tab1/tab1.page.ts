@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 import { Observable } from 'rxjs';
 import { AlertController, ModalController } from '@ionic/angular';
 import { PedidoPage } from '../pages/pedido/pedido.page';
+import { CameraService } from '../services/camera.service';
 
 @Component({
   selector: 'app-tab1',
@@ -26,12 +27,17 @@ export class Tab1Page{
     private room: RoomTappaService,
     private alertController: AlertController,
     private modal: ModalController,
+    private cameraService: CameraService,
     private authService: AuthService) { 
-      
       
       room.getRoom().forEach((data)=>{
         this.listOrders = [];
         data.forEach((data)=>{
+          if(data.boss.image ==  "" || data.boss.image == null){
+            data.boss.image = "assets/user_default.png";
+          }else{
+            data.boss.image = this.cameraService.dataBase64 + data.boss.image;
+          }
           this.listOrders.push({
             $key: data.$key,
             id: data.id,
@@ -45,12 +51,7 @@ export class Tab1Page{
         console.log(this.listOrders);
       })
     }
-
-  async ionViewWillEnter(){
-    console.log("ionViewWillEnter Tab1 Carga")
-    this.authService.user = await this.apiUser.getUser(this.authService.user.id);
-  }
-
+    
   async alertStreet() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -91,6 +92,7 @@ export class Tab1Page{
   }
 
   public async addRoom(){
+    this.authService.user = await this.apiUser.getUser(this.authService.user.id);
     if(this.street!=""){
       let o:Order = {
         street: this.street,

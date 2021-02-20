@@ -12,13 +12,45 @@ import { LoadingService } from 'src/app/services/loading.service';
 export class ListFoodPage implements OnInit {
 
   public allFood:Food[] = [];
+  public allFoodSearch:Food[] = [];
 
   constructor(private modalController:ModalController, private loadService: LoadingService, private foodService: ApiFoodService) { 
   }
 
   async ngOnInit() {
+    await this.loadService.cargarLoading()
     this.allFood = await this.foodService.getAllFood();
     console.log(this.allFood);
+    this.initializeItems();
+    setTimeout(() => {
+      this.loadService.pararLoading();
+    }, 1000);
+  }
+
+  initializeItems(){
+    this.allFoodSearch = this.allFood;
+  }
+
+  getItems(ev:any){
+    this.initializeItems();
+    let val = ev.target.value;
+
+    if(val && val.trim() != ""){
+      this.allFoodSearch = this.allFoodSearch.filter((food)=>{
+        return (food.name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  public async cargaDatos($event=null){
+    await this.loadService.cargarLoading();
+    this.allFood = await this.foodService.getAllFood();
+    setTimeout(() => {
+      this.loadService.pararLoading();
+    }, 1000);
+    if($event){
+      $event.target.complete();
+    }
   }
 
   public selectFood(food:Food){

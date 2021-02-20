@@ -4,9 +4,11 @@ import { Router } from '@angular/router';
 import { MenuController, ModalController } from '@ionic/angular';
 import jsSHA from 'jssha';
 import { AppComponent } from 'src/app/app.component';
+import { ApiUserService } from 'src/app/services/api-user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { ForgetPasswordPage } from '../forget-password/forget-password.page';
 import { RegistroPage } from '../registro/registro.page';
 
 @Component({
@@ -15,7 +17,7 @@ import { RegistroPage } from '../registro/registro.page';
   styleUrls: ['./inicio-sesion.page.scss'],
 })
 
-export class InicioSesionPage implements OnInit {
+export class InicioSesionPage{
 
   public tasks: FormGroup;
 
@@ -26,6 +28,7 @@ export class InicioSesionPage implements OnInit {
     private authService: AuthService, 
     private router: Router,
     private modalController: ModalController,
+    private userService: ApiUserService,
     private menuCtrl: MenuController,
     private loadService: LoadingService,
     private toastService: ToastService) {
@@ -37,10 +40,22 @@ export class InicioSesionPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ionViewWillEnter() {
+    console.log("Jaja24");
     this.menuCtrl.enable(false);
     if(this.authService.isLogged()){
-      this.router.navigate(['/']);
+      try{
+        await this.loadService.cargarLoading();
+        this.authService.user = await this.userService.getUser(this.authService.user.id);
+        console.log("Estoy en el ionViewWillEnter del inicio-sesion.page");
+        console.log(this.authService.user);
+        this.menuCtrl.enable(true);
+        await this.loadService.pararLoading();
+        this.router.navigate(['/']);
+      }catch(err){
+        console.log(err);
+        await this.loadService.pararLoading();
+      }
     }
   }
 
@@ -76,8 +91,11 @@ export class InicioSesionPage implements OnInit {
     }
   }
 
-  public hola() {
-    console.log("hola");
+  public async changeForgetPassword() {
+    const modal = await this.modalController.create({
+      component: ForgetPasswordPage,
+    });
+    return await modal.present();
   }
 
 }

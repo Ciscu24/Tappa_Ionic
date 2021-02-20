@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="this.backButton()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mapa</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="text-align: center; justify-content: center;">
+<div id="myMap" style="width: 100%; height: 80%;"></div>
+<br>
+<ion-button (click)="getPositions()">¿Donde estoy?</ion-button>
+</ion-content>

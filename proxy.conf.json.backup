@@ -1,0 +1,22 @@
+{
+    "/user": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    },
+
+    "/order": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    },
+
+    "/food": {
+        "target": "http://localhost:8080",
+        "changeOrigin": true,
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

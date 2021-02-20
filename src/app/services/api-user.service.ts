@@ -112,6 +112,26 @@ export class ApiUserService {
     })
   }
 
+  public updateImage(id:number | string, image:string): Promise<void> {
+    const endpoint = environment.endpoint + environment.apiUser + "/editimage/" + id;
+    let myImage = {
+      image: image
+    }
+    return new Promise((resolve, reject) => {
+      if(id){
+        this.http.setDataSerializer('json');
+        this.http
+          .put(endpoint, myImage, this.header)
+          .then(d => {
+            resolve();
+          })
+          .catch(err => reject(err));
+      }else{
+        reject("User no exists");
+      }
+    })
+  }
+
   private get header():any{
     return {
       "Access-Control-Allow-Origin": "*",

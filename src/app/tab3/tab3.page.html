@@ -16,18 +16,12 @@
     </ion-toolbar>
   </ion-header>
   <div class="user">
-    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" class="custom-avatar" />
+    <img [src]="imgURL" class="custom-avatar" (click)="changeImage()" style="border-radius: 100%; border: 4px solid #b93b4e;"/>
     <h3>{{user.name}} {{user.surnames}}</h3>
     <p>{{user.email}}</p>
     <p>Envio: {{user.shipping}}</p>
     <p>Llamada: {{user.call}}</p>
     <hr>
     <ion-button (click)="logout()">Cerrar Sesión</ion-button>
-
-    <div >
-      <img src="{{imgURL}}" height="200" width="200">
-      <ion-button (click)="getCamera()">From Camera</ion-button>
-      <ion-button (click)="getGallery()">From Gallery</ion-button>
-    </div>
   </div>
 </ion-content>

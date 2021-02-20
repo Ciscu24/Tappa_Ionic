@@ -31,6 +31,25 @@
     box-shadow: none !important;
 }
 
+.loading-content{
+    width: 50% !important;
+}
+
+*{
+    --background-checked: #994d58 !important;
+}
+
+
+/*.loading-spinner{
+
+    background-image: url("assets/logoBlack.png") !important;
+    background-color: #cccccc !important;
+}
+
+ion-spinner{
+    visibility: hidden !important;
+}*/
+
 .myToast {
     transform: translateY(-70px) !important;
 }

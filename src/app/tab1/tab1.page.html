@@ -9,11 +9,17 @@
 
 <ion-content [fullscreen]="true">
 
+  <div style="text-align: center;" *ngIf="listOrders.length==0">
+    <p style="font-size: 18px;">No hay pedidos de momento</p>
+    <p style="font-size: 18px;">¿Por que no creas tu uno?</p>
+    <img src="assets/logo.png" style="width: 40%;">
+  </div>
+
   <ion-card *ngFor="let order of listOrders" (click)="selectRoom(order.$key)">
     <ion-card-header>
       <ion-row justify-content-between>
         <ion-col col-auto class="image" size="4">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          <img src="{{order.boss.image}}"  style="border-radius: 100%; border: 2px solid #b93b4e;">
         </ion-col>
         <ion-col>
           <ion-row text-wrap>

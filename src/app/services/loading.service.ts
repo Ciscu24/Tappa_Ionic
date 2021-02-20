@@ -17,8 +17,8 @@ export class LoadingService {
     if(!this.loadingActivo){
       const loading = await this.loadingController.create({
         cssClass: 'my-custom-class',
-        message: '',
-        spinner:'crescent'
+        message: '<ion-img src="/assets/TappaAnimation.gif" style="width: 10%;" alt="loading..."></ion-img>',
+        spinner: null
       });
       await loading.present();
       this.loadingActivo = true;

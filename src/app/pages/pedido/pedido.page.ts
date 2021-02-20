@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Order } from 'src/app/model/Order';
 import { Food } from 'src/app/model/Food';
@@ -17,7 +17,7 @@ import { ToastService } from 'src/app/services/toast.service';
   templateUrl: './pedido.page.html',
   styleUrls: ['./pedido.page.scss'],
 })
-export class PedidoPage implements OnInit {
+export class PedidoPage implements OnInit, OnDestroy{
 
   @Input('key') key:string;
   order:Order = {
@@ -383,6 +383,11 @@ export class PedidoPage implements OnInit {
   async ionViewDidLeave(){
     console.log("ionViewDidLeave de pedido.page")
     this.authService.user = await this.userService.getUser(this.authService.user.id);
+    this.loadService.pararLoading();
+  }
+
+  ngOnDestroy(){
+    this.loadService.pararLoading();
   }
 
   public recoleccion(){

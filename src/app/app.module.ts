@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from 'src/environments/environment';
 import { RoomTappaService } from './services/room-tappa.service';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { ThemeService } from './services/theme.service';
@@ -43,6 +44,7 @@ import { ThemeService } from './services/theme.service';
     ToastService,
     ThemeService,
     NativeStorage,
+    Geolocation,
     HTTP,
     StatusBar,
     SplashScreen,

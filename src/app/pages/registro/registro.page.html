@@ -31,6 +31,14 @@
           <ion-icon  [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
       </button>
     </ion-item>
+
+    <ion-item>
+      <ion-label  position="floating">Repetir Contraseña</ion-label>
+      <ion-input  #passwordEyeRegister  [type]="passwordTypeInput" formControlName="passwordConfirm" clearOnEdit="false"></ion-input>
+      <button class="btn_eye_icon" (click)="togglePasswordMode()">
+          <ion-icon  [name]="(passwordTypeInput === 'text')?'eye-off':'eye'"></ion-icon>
+      </button>
+    </ion-item>
   
     <div class="buttonFinal">
       <ion-button color="primary" type="submit" [disabled]="!tasks.valid" (click)="register()">Registrarse</ion-button>

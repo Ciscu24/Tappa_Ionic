@@ -8,5 +8,6 @@ export interface User{
     call: number,
     email: string,
     password: string,
+    image?: string,
     orders?: Array<Order>
 }

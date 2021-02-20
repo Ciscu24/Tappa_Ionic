@@ -5,6 +5,8 @@ import { ApiUserService } from '../services/api-user.service';
 import { AuthService } from '../services/auth.service';
 import { LoadingService } from '../services/loading.service';
 import { Camera } from '@ionic-native/camera/ngx';
+import { CameraService } from '../services/camera.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -13,7 +15,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 })
 export class Tab3Page implements OnInit{
 
-  public imgURL;
+  public imgURL = "assets/user_default.png";
 
   public user:User = {
     name: "",
@@ -28,7 +30,8 @@ export class Tab3Page implements OnInit{
     private authService: AuthService,
     private userService: ApiUserService,
     private loadService: LoadingService,
-    private camera: Camera,
+    private cameraService: CameraService,
+    private alertController: AlertController,
     private router:Router) {}
 
   ngOnInit(){
@@ -36,10 +39,17 @@ export class Tab3Page implements OnInit{
 
   async ionViewWillEnter(){
     await this.loadService.cargarLoading();
-    this.authService.user = await this.userService.getUser(this.authService.user.id);
-    this.user = await this.authService.user;
-    console.log(this.authService.user);
-    await this.loadService.pararLoading();
+    try{
+      this.authService.user = await this.userService.getUser(this.authService.user.id);
+      this.user = await this.authService.user;
+      console.log(this.authService.user);
+      this.haveImage();
+      await this.loadService.pararLoading();
+    }catch(err){
+      console.log(err);
+      await this.loadService.pararLoading();
+    }
+    
   }
   
   public logout(){
@@ -49,26 +59,84 @@ export class Tab3Page implements OnInit{
     }
   }
 
-  getCamera(){
-    this.camera.getPicture({
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      destinationType: this.camera.DestinationType.FILE_URI
-    }).then((res)=>{
-      this.imgURL = 'data:image/jpeg;base64,' + res;
-    }).catch(e => {
-      console.log(e);
-    })
+  public haveImage(){
+    if(this.user.image ==  "" || this.user.image == null){
+      this.imgURL = "assets/user_default.png";
+    }else{
+      this.imgURL = this.cameraService.dataBase64 + this.user.image;
+    }
   }
 
-  getGallery(){
-    this.camera.getPicture({
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL
-    }).then((res)=>{
-      this.imgURL = 'data:image/jpeg;base64,' + res;
-    }).catch(e => {
-      console.log(e);
-    })
-  }
+  public async changeImage(){
+    let image:string = "";
 
+    const alert = await this.alertController.create({
+      header: 'Cambiar Foto',
+      buttons: [
+        {
+          text: 'Camara',
+          handler: () => {
+            image = "Camara";
+          }
+        },
+        {
+          text: 'Galeria',
+          handler: () => {
+            image = "Galeria";
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            image = "";
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+    await alert.onDidDismiss();
+
+    try{
+      if(image == "Galeria"){
+        let photo = await this.cameraService.getGallery()
+        this.imgURL = this.cameraService.dataBase64 + photo;
+        this.user.image = photo;
+  
+        console.log(this.user.image);
+        this.loadService.cargarLoading();
+        this.userService.updateImage(this.user.id, this.user.image);
+        this.imgURL = this.cameraService.dataBase64 + this.user.image;
+        setTimeout(() => {
+          this.loadService.pararLoading();
+         }, 1000);
+      }else if(image == "Camara"){
+        let photo2 = await this.cameraService.getCamera()
+        this.imgURL = this.cameraService.dataBase64 + photo2;
+        this.user.image = photo2;
+        console.log(this.user.image);
+        this.loadService.cargarLoading();
+        this.userService.updateImage(this.user.id, this.user.image);
+        this.imgURL = this.cameraService.dataBase64 + this.user.image;
+        setTimeout(() => {
+          this.loadService.pararLoading();
+         }, 1000);
+      }else{
+        this.loadService.cargarLoading();
+        this.userService.updateImage(this.user.id, "");
+        this.haveImage();
+        setTimeout(() => {
+          this.loadService.pararLoading();
+         }, 1000);
+      }
+    }catch(err){
+      console.log(err);
+      this.loadService.cargarLoading();
+      this.userService.updateImage(this.user.id, "");
+      setTimeout(() => {
+        this.loadService.pararLoading();
+       }, 1000);
+    }
+  }
 }

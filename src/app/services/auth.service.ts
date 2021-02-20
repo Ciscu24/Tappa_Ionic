@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { User } from '../model/User';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import { ApiUserService } from './api-user.service';
+import { LoadingService } from './loading.service';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,7 @@ export class AuthService implements CanActivate {
     if (this.user.id == -1) {
       return false;
     } else {
+      //this.loadService.cargarLoading();
       return true;
     }
   }

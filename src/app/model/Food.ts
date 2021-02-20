@@ -4,5 +4,6 @@ export interface Food{
     id?:number | string,
     name: string,
     price: number,
-    orders?: Array<Order>
+    orders?: Array<Order>,
+    image?: string
 }

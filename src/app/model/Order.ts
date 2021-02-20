@@ -10,5 +10,6 @@ export interface Order{
     price?: number, 
     users?: Array<User>,
     addedFood?: Array<Food>,
-    finishOrder?: boolean
+    finishOrder?: boolean,
+    image?: string
 }

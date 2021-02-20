@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="" (click)="this.backButton()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configuración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="justify-content: center; text-align: center;">
+  <br>
+  <div style="width: 80%; margin: 0 auto; text-align: left;">
+    <p (click)="changeName()">Cambiar Nombre: {{user.name}} </p>
+    <hr>
+    <p (click)="changeSurname()">Cambiar Apellidos: {{user.surnames}}</p>
+    <hr>
+    <p (click)="changePassword()">Cambiar Contraseña: *************</p>
+  </div>
+  <br>
+  <ion-button (click)="confirmChanges()">Guardar Usuario</ion-button>
+</ion-content>

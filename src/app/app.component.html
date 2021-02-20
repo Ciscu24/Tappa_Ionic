@@ -1,24 +1,21 @@
 <ion-app>
 
   <ion-menu menuId="main-menu" contentId="main">
-    <ion-header>
-      <ion-card class="hide-card">
-        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y" class="custom-avatar" />
-        <h3>Francisco Garcia Cordoba</h3>
-        <p>ciscu6@gmail.com</p>
-        <hr>
-      </ion-card>
-    </ion-header>
-
     <ion-content>
       <ion-list>
 
-        <ion-item (click)="enableDark()">
-          <ion-icon name="settings-outline" slot="start"></ion-icon>
-          <ion-label>Cambiar Color</ion-label>
+        <ion-item>
+          <ion-icon slot="start" name="moon"></ion-icon>
+          <ion-label>Modo Oscuro</ion-label>
+          <ion-toggle slot="end" (ionChange)="changeTheme($event)" [checked]="this.darkModeBoolean"></ion-toggle>
         </ion-item>
 
-        <ion-item>
+        <ion-item (click)="changeMap()">
+          <ion-icon name="map-outline" slot="start"></ion-icon>
+          <ion-label>Mapa</ion-label>
+        </ion-item>
+
+        <ion-item (click)="changeConfig()">
           <ion-icon name="settings-outline" slot="start"></ion-icon>
           <ion-label>Configuración</ion-label>
         </ion-item>

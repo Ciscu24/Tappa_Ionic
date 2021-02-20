@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,20 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  @ViewChild('myTabs') tabs: IonTabs;
+
+  public imageTappa = "assets/logoWhite.png"
+
+  constructor() {
+  }
+
+  getSelectedTab(): void {
+    let tab:string = this.tabs.getSelected();
+    if(tab == "tab1"){
+      this.imageTappa = "assets/logoBlack.png";
+    }else{
+      this.imageTappa = "assets/logoWhite.png";
+    }
+  }
 
 }
