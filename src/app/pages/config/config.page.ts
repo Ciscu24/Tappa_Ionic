@@ -6,6 +6,7 @@ import { ApiUserService } from 'src/app/services/api-user.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { ToastService } from 'src/app/services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-config',
@@ -28,6 +29,7 @@ export class ConfigPage implements OnInit {
     private modalController:ModalController,
     private toastService: ToastService,
     private alertController: AlertController,
+    private router: Router,
     private loadService: LoadingService) { }
 
   async ngOnInit() {
@@ -58,7 +60,7 @@ export class ConfigPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -90,7 +92,7 @@ export class ConfigPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -127,7 +129,7 @@ export class ConfigPage implements OnInit {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
@@ -168,6 +170,45 @@ export class ConfigPage implements OnInit {
 
     this.modalController.dismiss();
     
+  }
+
+  public async deleteAccount(){
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '¿Esta seguro de borrar la cuenta?',
+      message: 'Estos cambios no se pueden deshacer',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: async() => {
+            this.loadService.cargarLoading();
+            try{
+              await this.usuarioService.removeUser(this.user);
+              setTimeout(()=>{
+                this.loadService.pararLoading();
+                this.toastService.presentToast("Usuario borrado correctamente", "myToast", 2000, "primary");
+                this.authService.logout();
+                this.modalController.dismiss();
+                this.router.navigate(["/inicio-sesion"]);
+              }, 1000);
+            }catch(err){
+              console.log(err);
+              this.toastService.presentToast("El usuario no se ha podido borrar", "myToast", 2000, "primary");
+              this.loadService.pararLoading();
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   public backButton(){

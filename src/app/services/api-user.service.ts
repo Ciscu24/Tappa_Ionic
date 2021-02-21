@@ -78,7 +78,7 @@ export class ApiUserService {
    */
   public removeUser(user:User): Promise<void> {
     const id:any = user.id ? user.id : user;
-    const endpoint = environment.endpoint + environment.apiUser;
+    const endpoint = environment.endpoint + environment.apiUser + id;
     return new Promise((resolve, reject) => {
       this.http
         .delete(endpoint, {}, this.header)

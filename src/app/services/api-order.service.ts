@@ -79,7 +79,7 @@ export class ApiOrderService {
    */
   public removeOrder(order:Order): Promise<void> {
     const id:any = order.id ? order.id : order;
-    const endpoint = environment.endpoint + environment.apiOrder;
+    const endpoint = environment.endpoint + environment.apiOrder + id;
     return new Promise((resolve, reject) => {
       this.http
         .delete(endpoint, {}, this.header)

@@ -41,7 +41,6 @@ export class InicioSesionPage{
   }
 
   async ionViewWillEnter() {
-    console.log("Jaja24");
     this.menuCtrl.enable(false);
     if(this.authService.isLogged()){
       try{
@@ -49,6 +48,7 @@ export class InicioSesionPage{
         this.authService.user = await this.userService.getUser(this.authService.user.id);
         console.log("Estoy en el ionViewWillEnter del inicio-sesion.page");
         console.log(this.authService.user);
+        this.tasks.reset();
         this.menuCtrl.enable(true);
         await this.loadService.pararLoading();
         this.router.navigate(['/']);

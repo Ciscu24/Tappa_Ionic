@@ -78,7 +78,7 @@ export class ApiFoodService {
    */
   public removeFood(food:Food): Promise<void> {
     const id:any = food.id ? food.id : food;
-    const endpoint = environment.endpoint + environment.apiFood;
+    const endpoint = environment.endpoint + environment.apiFood + id;
     return new Promise((resolve, reject) => {
       this.http
         .delete(endpoint, {}, this.header)
