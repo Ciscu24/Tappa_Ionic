@@ -10,6 +10,9 @@ export class ApiOrderService {
 
   constructor(private http:HTTP) { }
 
+  /**
+   * Método que devuelve todos los pedidos de la base de datos
+   */
   public getAllOrders():Promise<Order[] | null>{
     return new Promise((resolve, reject)=>{
       const endpoint = environment.endpoint + environment.apiOrder; //http://localhost:8080/order/
@@ -26,6 +29,10 @@ export class ApiOrderService {
     })
   }
 
+  /**
+   * Método que crea un pedido
+   * @param order El pedido a crear
+   */
   public createOrder(order:Order): Promise<void>{
     const endpoint = environment.endpoint + environment.apiOrder;
     return new Promise((resolve, reject) => {
@@ -43,6 +50,10 @@ export class ApiOrderService {
     })
   }
 
+  /**
+   * Método que devuelve un pedido en específico
+   * @param id el id del pedido
+   */
   public getOrder(id?:number | string): Promise<Order[] | null>{
     return new Promise((resolve, reject) => {
       let endpoint = environment.endpoint + environment.apiOrder;
@@ -62,6 +73,10 @@ export class ApiOrderService {
     })
   }
  
+  /**
+   * Método que borra un pedido en específico
+   * @param order el pedido a borrar
+   */
   public removeOrder(order:Order): Promise<void> {
     const id:any = order.id ? order.id : order;
     const endpoint = environment.endpoint + environment.apiOrder;
@@ -75,6 +90,10 @@ export class ApiOrderService {
     })
   }
 
+  /**
+   * Método que modifica un pedido en específico
+   * @param order pedido a modificar
+   */
   public updateOrder(order: Order): Promise<void> {
     const endpoint = environment.endpoint + environment.apiOrder;
     return new Promise((resolve, reject) => {
@@ -92,6 +111,10 @@ export class ApiOrderService {
     })
   }
 
+  /**
+   * Método que devuelve todos los pedidos de un usuario
+   * @param id el id del usuario
+   */
   public getOrdersByUserId(id?:number | string): Promise<Order[] | null>{
     return new Promise((resolve, reject) => {
       let endpoint = environment.endpoint + environment.apiOrder + "users/";
@@ -111,6 +134,10 @@ export class ApiOrderService {
     })
   }
 
+  /**
+   * Método que te devuelve el total de un pedido
+   * @param id el id del pedido
+   */
   public getAllPriceForOrder(id?:number | string): Promise<number | null>{
     return new Promise((resolve, reject) => {
       let endpoint = environment.endpoint + environment.apiOrder + "price/";

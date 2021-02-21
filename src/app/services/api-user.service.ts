@@ -10,6 +10,9 @@ export class ApiUserService {
 
   constructor(private http:HTTP) { }
 
+  /**
+   * Método que devuelve todos los usuarios de la base de datos
+   */
   public getAllUsers():Promise<User[] | null>{
     return new Promise((resolve, reject) => {
       const endpoint = environment.endpoint + environment.apiUser; //http://localhost:8080/user/
@@ -25,6 +28,10 @@ export class ApiUserService {
     })
   }
 
+  /**
+   * Método que crea un usuario
+   * @param user el usuario a crear
+   */
   public createUser(user:User): Promise<void>{
     const endpoint = environment.endpoint + environment.apiUser;
     return new Promise((resolve, reject) => {
@@ -42,6 +49,10 @@ export class ApiUserService {
     })
   }
 
+  /**
+   * Método que devuelve un usuario en específico
+   * @param id el id del usuario
+   */
   public getUser(id?:number | string): Promise<User | null>{
     return new Promise((resolve, reject) => {
       let endpoint = environment.endpoint + environment.apiUser;
@@ -61,6 +72,10 @@ export class ApiUserService {
     })
   }
  
+  /**
+   * Método que borra un usuario en especifíco
+   * @param user el usuario a borrar
+   */
   public removeUser(user:User): Promise<void> {
     const id:any = user.id ? user.id : user;
     const endpoint = environment.endpoint + environment.apiUser;
@@ -74,6 +89,10 @@ export class ApiUserService {
     })
   }
 
+  /**
+   * Método que modifica un usuario en específico
+   * @param user usuario a modificar
+   */
   public updateUser(user: User): Promise<void> {
     const endpoint = environment.endpoint + environment.apiUser;
     return new Promise((resolve, reject) => {
@@ -91,6 +110,12 @@ export class ApiUserService {
     })
   }
 
+  /**
+   * Método que modifica la llamada y el envio de un usuario
+   * @param id el id del usuario que se va a modificar
+   * @param call los puntos de llamada
+   * @param shipping los puntos de envio
+   */
   public updateCallAndShipping(id:number | string, call:number, shipping:number): Promise<void> {
     const endpoint = environment.endpoint + environment.apiUser + "/edit/" + id;
     let myObject = {
@@ -112,6 +137,11 @@ export class ApiUserService {
     })
   }
 
+  /**
+   * Método que modifica la imagen del usuario
+   * @param id el id del usuario en cuestión
+   * @param image la imagen que se va a modificar
+   */
   public updateImage(id:number | string, image:string): Promise<void> {
     const endpoint = environment.endpoint + environment.apiUser + "/editimage/" + id;
     let myImage = {

@@ -10,6 +10,9 @@ export class ApiFoodService {
 
   constructor(private http:HTTP) { }
 
+  /**
+   * Método que devuelve toda la comida de la base de datos
+   */
   public getAllFood():Promise<Food[] | null>{
     return new Promise((resolve, reject)=>{
       const endpoint = environment.endpoint + environment.apiFood; //http://localhost:8080/food/
@@ -25,6 +28,10 @@ export class ApiFoodService {
     })
   }
 
+  /**
+   * Método que crea una comida
+   * @param food la comida a crear
+   */
   public createFood(food:Food): Promise<void>{
     const endpoint = environment.endpoint + environment.apiFood;
     return new Promise((resolve, reject) => {
@@ -42,6 +49,10 @@ export class ApiFoodService {
     })
   }
 
+  /**
+   * Método que devuelve una comida en específico
+   * @param id el id de la comida
+   */
   public getFood(id?:number | string): Promise<Food[] | null>{
     return new Promise((resolve, reject) => {
       let endpoint = environment.endpoint + environment.apiFood;
@@ -61,6 +72,10 @@ export class ApiFoodService {
     })
   }
  
+  /**
+   * Método que borra una comida en específico
+   * @param food la comida a borrar
+   */
   public removeFood(food:Food): Promise<void> {
     const id:any = food.id ? food.id : food;
     const endpoint = environment.endpoint + environment.apiFood;
@@ -74,6 +89,10 @@ export class ApiFoodService {
     })
   }
 
+  /**
+   * Método que modifica una comida en específico
+   * @param food comida a modificar
+   */
   public updateFood(food: Food): Promise<void> {
     const endpoint = environment.endpoint + environment.apiFood;
     return new Promise((resolve, reject) => {

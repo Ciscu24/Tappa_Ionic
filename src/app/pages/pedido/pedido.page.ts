@@ -208,6 +208,9 @@ export class PedidoPage implements OnInit, OnDestroy{
     
   }
 
+  /**
+   * Método que calcula la llamada y el envio de los usuarios
+   */
   public calculateUserCallAndShipping(){
     console.log("hola");
     let shippingFinal:number = 0;
@@ -228,6 +231,9 @@ export class PedidoPage implements OnInit, OnDestroy{
     })
   }
 
+  /**
+   * Método que muestra un alert para cambiar o confirmar el pedido y el envio
+   */
   public async showUserCallAndShipping(){
     this.calculateUserCallAndShipping();
     const alert = await this.alertController.create({
@@ -263,6 +269,9 @@ export class PedidoPage implements OnInit, OnDestroy{
     await alert.onDidDismiss();
   }
 
+  /**
+   * Método para seleccionar otro usuario para el envio y la llamada
+   */
   public async selectUserCallAndShipping(){
 
     let idCall:number | string = 0;
@@ -390,6 +399,9 @@ export class PedidoPage implements OnInit, OnDestroy{
     this.loadService.pararLoading();
   }
 
+  /**
+   * Método que calcula el total de los objetos por nombre
+   */
   public recoleccion(){
     let allFood = this.addedFood;
     let index = allFood.length - 1;
@@ -420,6 +432,11 @@ export class PedidoPage implements OnInit, OnDestroy{
     }
   }
 
+  /**
+   * Método que quita objetos de un array por nombre
+   * @param foodArray el array que se van a quitar objetos
+   * @param nameFood el nombre del objeto
+   */
   public quitarObjetos(foodArray:Food[], nameFood:string){
     let index = foodArray.length - 1;
     while(index >= 0){

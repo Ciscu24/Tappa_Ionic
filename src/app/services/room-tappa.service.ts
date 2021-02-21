@@ -17,6 +17,9 @@ export class RoomTappaService {
     );
   }
 
+  /**
+   * Método que devuelve una lista observable de firebase
+   */
   getRoom(): Observable<Order[]> {
     return this.orderDB.snapshotChanges().pipe(
       map((changes) => {
@@ -28,14 +31,26 @@ export class RoomTappaService {
     )
   }
 
+  /**
+   * Método que agrega un pedido a firebase
+   * @param order el pedido en cuestión
+   */
   addRoom(order:Order){
     return this.orderDB.push(order);
   }
 
+  /**
+   * Método que borra un pedido de firebase
+   * @param id el id del pedido
+   */
   deleteRoom(id: string){
     this.db.list('/orders').remove(id);
   }
 
+  /**
+   * Método que modifica un pedido
+   * @param newOrder el pedido a modificar
+   */
   editRoom(newOrder){
     const $key = newOrder.$key;
     delete newOrder.$key;

@@ -38,6 +38,9 @@ export class AuthService implements CanActivate {
     }
   }
 
+  /**
+   * Método que te dice si hay un usuario logeado
+   */
   public isLogged(): boolean {
     console.log(this.user.id);
     console.log(this.user);
@@ -49,6 +52,9 @@ export class AuthService implements CanActivate {
     }
   }
 
+  /**
+   * Método para cerrar sesion
+   */
   public async logout() {
     this.user = {
       id: -1,
@@ -63,6 +69,11 @@ export class AuthService implements CanActivate {
     await this.storage.setItem("userTappa", this.user);
   }
 
+  /**
+   * Método para iniciar sesion
+   * @param email el email del usuario
+   * @param password la contraseña del usuario
+   */
   public async login(email:string, password:string) {
     try {
       let u = await this.returnUser(email, password);
@@ -87,6 +98,11 @@ export class AuthService implements CanActivate {
     return this.user;
   }
 
+  /**
+   * Método que devuelve el usuario que tenga ese email y esa contraseña
+   * @param email el email del usuario
+   * @param password la contraseña del usuario
+   */
   public async returnUser(email:string, password:string):Promise<User>{
     let userFind:User = {
       id: -1,

@@ -11,6 +11,9 @@ export class CameraService {
 
   constructor(private camera: Camera, private alertController: AlertController) { } 
 
+  /**
+   * Método que abre la cámara y devuelve la foto en base64
+   */
   public async getCamera():Promise<string>{
     return this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.CAMERA,
@@ -26,6 +29,9 @@ export class CameraService {
     })
   }
 
+  /**
+   * Método que abre la galería y devuelve la imagen en base64
+   */
   public async getGallery():Promise<string>{
     return this.camera.getPicture({
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -41,6 +47,9 @@ export class CameraService {
     })
   }
 
+  /**
+   * Método que muestra un alert para seleccionar si abrir la cámara o la galería
+   */
   public async showAlertImage():Promise<Promise<string>>{
     let image:string = "";
 
